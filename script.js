@@ -169,7 +169,8 @@
                 name: r.opportunity_name,
                 source: r.source,
                 email: r.email,
-                phone: r.phone
+                phone: r.phone,
+                opportunityType: r.opportunity_type
             };
         });
     }
@@ -324,6 +325,11 @@
     // =========================
     function filter() {
         let data = state.raw;
+
+        // 🔥 Skip delete events
+        data = data.filter(d => d.opportunityType !== 'OpportunityDelete');
+
+        console.log(data, 'res');
 
         if (state.dateStart) {
             const s = new Date(state.dateStart);
